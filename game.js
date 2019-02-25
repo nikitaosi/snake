@@ -12,19 +12,18 @@ var config = {
 
 var game = new Phaser.Game(config);
 
+var cursors = game.input.keyboard.createCursorKeys();
+var UP = 0;
+var DOWN = 1;
+var LEFT = 2;
+var RIGHT = 3;
+
 function preload () {
     this.load.image('body', 'assets/games/snake/body.png');
     this.load.image('food', 'assets/games/snake/food.png');
 }
 
 function create () {
-
-    var cursors = this.input.keyboard.createCursorKeys();
-    var UP = 0;
-    var DOWN = 1;
-    var LEFT = 2;
-    var RIGHT = 3;
-
     var foodsprite = this.add.image('food');
     var snakesprite = this.add.image(0,0,'body');
 
@@ -41,21 +40,19 @@ function create () {
             this.moveTime = 0;
         },
 
-        update: function(time) {
-            this.setPosition(snake.head.x+1, snake.head.x)
-        }
-
+    //    update: function(time) {
+    //    }
     });
-    var snake = new Snake(this, 256, 256);
+}
 
-    function move () {
-//
-        console.log('test');
-    }
+var snake = new Snake(this, 256, 256);
+
+function move () {
+//   snake.setPosition(snake.head.x+1, snake.head.y);
 }
 
   function update (time, delta) {
- this.move();
+    move();
   if (cursors.up.isDown) {
 
   }
