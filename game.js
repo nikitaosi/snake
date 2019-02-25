@@ -26,21 +26,12 @@ function create () {
     var RIGHT = 3;
 
     var foodsprite = this.add.image('food');
-    var snakesprite = this.add.image('body');
+    var snakesprite = this.add.image(0,0,'body');
 
     var Snake = new Phaser.Class({
 
-        ultraImpFunction: function FF()
-        {
-
-        },
-
         initialize:
 
-        //АХАХХА хахахаха ха
-
-
-        //ха
         function Snake(scene, x, y) {
             this.head = snakesprite;
             this.head.x = x;
@@ -55,7 +46,7 @@ function create () {
         }
 
     });
-    var snake = new Snake(this, 16, 16);
+    var snake = new Snake(this, 8, 8);
 }
 
 function move () {
