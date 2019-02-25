@@ -32,6 +32,7 @@ function create () {
 
         initialize:
 
+        //АХАХХА
         function Snake(scene, x, y) {
             this.coordinates = new Phaser.Geom.Point(x, y);
             this.head = snakesprite;
