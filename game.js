@@ -30,7 +30,9 @@ function create () {
 
     var Snake = new Phaser.Class({
 
-        create: function(scene, x, y) {
+        initialize:
+
+        function Snake(scene, x, y) {
             this.coordinates = new Phaser.Geom.Point(x, y);
             this.head = snakesprite;
             this.head.x = x;
@@ -43,6 +45,7 @@ function create () {
         update: function(time) {
 
         }
+
     });
     var snake = new Snake(this, 16, 16);
 }
