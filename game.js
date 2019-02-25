@@ -30,6 +30,11 @@ function create () {
 
     var Snake = new Phaser.Class({
 
+        ultraImpFunction: function FF()
+        {
+
+        },
+
         initialize:
 
         //АХАХХА хахахаха ха
