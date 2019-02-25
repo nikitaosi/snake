@@ -6,7 +6,7 @@ var config = {
     scene: {
         preload: preload,
         create: create,
-//        update: update
+        update: update
     }
 }
 
@@ -42,18 +42,19 @@ function create () {
         },
 
         update: function(time) {
-
         }
 
     });
-    var snake = new Snake(this, 8, 8);
+    var snake = new Snake(this, 256, 256);
+
+    function move () {
+//   snake.setPosition(snake.head.x+1, snake.head.x)
+        console.log('test');
+    }
 }
 
-function move () {
-
-}
-
-  function update () {
+  function update (time, delta) {
+ this.move();
   if (cursors.up.isDown) {
 
   }
