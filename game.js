@@ -42,13 +42,14 @@ function create () {
         },
 
         update: function(time) {
+            this.setPosition(snake.head.x+1, snake.head.x)
         }
 
     });
     var snake = new Snake(this, 256, 256);
 
     function move () {
-//   snake.setPosition(snake.head.x+1, snake.head.x)
+//
         console.log('test');
     }
 }
