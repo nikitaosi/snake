@@ -1,7 +1,7 @@
 var config = {
     type: Phaser.WebGL,
-    width: 800,
-    height: 600,
+    width: 640,
+    height: 480,
     backgroundColor: '#aa7d65',
     scene: {
         preload: preload,
@@ -14,13 +14,13 @@ var UP = 0;
 var DOWN = 1;
 var LEFT = 2;
 var RIGHT = 3;
-var SPEED = 100;
+var SPEED = 70;
 
 var game = new Phaser.Game(config);
 var moveTime = 0;
 var step = 16;
 var direction = RIGHT;
-
+var headPosition = new Phaser.Geom.Point(240, 240);
 
 function preload () {
     this.load.image('body', 'assets/games/snake/body.png');
@@ -29,9 +29,18 @@ function preload () {
 
 function create () {
     this.cursors = this.input.keyboard.createCursorKeys();
-    food = this.add.image(512,256,'food');
-    snake = this.add.image(256,256,'body');
-    snake.setOrigin(0); food.setOrigin(0);
+    food = this.add.image(480,240,'food');
+    snake = this.add.group({
+        key: 'body',
+        repeat: 3,
+        setXY: {
+            x:240,
+            y:240,
+            stepX: 16
+        }
+    });
+    Phaser.Actions.SetOrigin(snake.getChildren(), 0, 0);
+    food.setOrigin(0.5);
 }
 
 function update (time) {
@@ -40,7 +49,7 @@ if (moveTime<=time) {
    moveTime = time + SPEED;
 }
 
-
+if (headPosition.x == food.x && headPosition.y == food.y) { eat(); }
 
 if (this.cursors.up.isDown) {
   direction = UP;
@@ -54,26 +63,39 @@ if (this.cursors.left.isDown) {
 if (this.cursors.right.isDown) {
   direction = RIGHT;
 }
+if (this.cursors.space.isDown) {
+  console.log(snake);
+}
 
 function move () {
   switch (direction) {
       case UP:
-          snake.y -= step;
-          if(snake.y<0){snake.y = 584}
+          Phaser.Actions.ShiftPosition(snake.getChildren(), headPosition.x, headPosition.y-16);
+          headPosition.y -= 16;
+          if(headPosition.y<0){headPosition.y = 464}
           break;
       case DOWN:
-          snake.y += step;
-          if(snake.y>584){snake.y = 0}
+          Phaser.Actions.ShiftPosition(snake.getChildren(), headPosition.x, headPosition.y+16);
+          headPosition.y += 16;
+          if(headPosition.y>464){headPosition.y = 0}
           break;
       case LEFT:
-          snake.x -= step;
-          if(snake.x<0){snake.x = 784}
+          Phaser.Actions.ShiftPosition(snake.getChildren(), headPosition.x-16, headPosition.y);
+          headPosition.x -= 16;
+          if(headPosition.x<0){headPosition.x = 624}
           break;
       case RIGHT:
-          snake.x += step;
-          if(snake.x>784){snake.x = 0}
+          Phaser.Actions.ShiftPosition(snake.getChildren(), headPosition.x+16, headPosition.y);
+          headPosition.x += 16;
+          if(headPosition.x>624){headPosition.x = 0}
           break;
   }
+}
+
+function eat() {
+    food.setPosition(Phaser.Math.Between(0, 39)*16, Phaser.Math.Between(0, 29)*16);
+    snake.create(-10,-10,'body');
+    console.log(snake.getLast())
 }
 
   }
